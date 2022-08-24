@@ -1,158 +1,173 @@
 <title>Carnatic Piano</title>
 <script src="audiosynth.js"></script>
+<script src="ragas.js"></script>
+<link rel="stylesheet" href="fontawesome.min.css"/>
 <h2 style="text-align: center; font-family: Copperplate;">Carnatic Piano</h2>
 <h3 style="text-align: center; font-family: Copperplate;">A simple piano with only the 16 swaras, for raga learners.</h3>
 <h3 style="text-align: center; font-family: 'Copperplate Gothic Light';">Choose the swaras for your raga, use keyboard or mouse to play the note. Use 'A' key for 'S' of next octave. The keyboard is for visualizing it on a real piano</h3>
-<table style="margin-top: 5%; margin-left: auto; margin-right: auto;">
-  <tr>
-    <th><button id="r1" class="button" onclick="setNote('r1')">R1</button></th>
-    <th><button id="g1" class="button" onclick="setNote('g1')">G1</button></th>
-    <th><button id="m1" class="button" onclick="setNote('m1')">M1</button></th>
-    <th><button id="d1" class="button" onclick="setNote('d1')">D1</button></th>
-    <th><button id="n1" class="button" onclick="setNote('n1')">N1</button></th>
-  </tr>
-  <tr>
-    <td><button id="r2" class="button" onclick="setNote('r2')">R2</button></td>
-    <th><button id="g2" class="button" onclick="setNote('g2')">G2</button></th>
-    <th><button id="m2" class="button" onclick="setNote('m2')">M2</button></th>
-    <th><button id="d2" class="button" onclick="setNote('d2')">D2</button></th>
-    <th><button id="n2" class="button" onclick="setNote('n2')">N2</button></th>
-  </tr>
-  <tr>
-    <td><button id="r3" class="button" onclick="setNote('r3')">R3</button></td>
-    <th><button id="g3" class="button" onclick="setNote('g3')">G3</button></th>
-    <th></th>
-    <th><button id="d3" class="button" onclick="setNote('d3')">D3</button></th>
-    <th><button id="n3" class="button" onclick="setNote('n3')">N3</button></th>
-  </tr>
-</table>
+<div style="width: 30%; margin-top: 5%; margin-left: auto; margin-right: auto; display: flex;">
+	<table>
+		<tr>
+			<th><button id="r1" class="button" onclick="setNote('r1')">R1</button></th>
+			<th><button id="g1" class="button" onclick="setNote('g1')">G1</button></th>
+			<th><button id="m1" class="button" onclick="setNote('m1')">M1</button></th>
+			<th><button id="d1" class="button" onclick="setNote('d1')">D1</button></th>
+			<th><button id="n1" class="button" onclick="setNote('n1')">N1</button></th>
+		</tr>
+		<tr>
+			<td><button id="r2" class="button" onclick="setNote('r2')">R2</button></td>
+			<th><button id="g2" class="button" onclick="setNote('g2')">G2</button></th>
+			<th><button id="m2" class="button" onclick="setNote('m2')">M2</button></th>
+			<th><button id="d2" class="button" onclick="setNote('d2')">D2</button></th>
+			<th><button id="n2" class="button" onclick="setNote('n2')">N2</button></th>
+		</tr>
+		<tr>
+			<td><button id="r3" class="button" onclick="setNote('r3')">R3</button></td>
+			<th><button id="g3" class="button" onclick="setNote('g3')">G3</button></th>
+			<th></th>
+			<th><button id="d3" class="button" onclick="setNote('d3')">D3</button></th>
+			<th><button id="n3" class="button" onclick="setNote('n3')">N3</button></th>
+		</tr>
+	</table>
+	<table style="padding-left: 10em;">
+		<tr>
+			<th>Pitch</th>
+		</tr>
+		<tr>
+			<td><button class="button" onclick="decrease_pitch()">&#8592;</button></td>
+						<th><button id="current_pitch" style="border: none" class="button">C</button></th>
+			<th><button class="button" onclick="increase_pitch()">&#8594;</button></th>
+
+
+		</tr>
+		<!-- <tr>
+			<th>Sustain</th>
+		</tr>
+		<tr>
+			<th><button class="button" onclick="decrease_sustain()">&#8592;</button></th>
+			<th><button id="current_sustain" style="border: none" class="button">2</button></th>
+			<td><button class="button" onclick="increase_sustain()">&#8594;</button></td>
+		</tr>
+		<tr> -->
+
+		</tr>
+	</table>
+</div>
 <div style="width: 40%; margin: auto; margin-top: 5%">
-<button class="button" id="note_s" onclick="playNote('s');">S</button>
-<button class="button" id="note_r" onclick="playNote('r');">R</button>
-<button class="button" id="note_g" onclick="playNote('g');">G</button>
-<button class="button" id="note_m" onclick="playNote('m');">M</button>
-<button class="button" id="note_p" onclick="playNote('p');">P</button>
-<button class="button" id="note_d" onclick="playNote('d');">D</button>
-<button class="button" id="note_n" onclick="playNote('n');">N</button>
-<button class="button" id="note_a" onclick="playNote('a');">S</button>
+	<button class="button" id="note_s" onclick="playNote('s');">S</button>
+	<button class="button" id="note_r" onclick="playNote('r');">R</button>
+	<button class="button" id="note_g" onclick="playNote('g');">G</button>
+	<button class="button" id="note_m" onclick="playNote('m');">M</button>
+	<button class="button" id="note_p" onclick="playNote('p');">P</button>
+	<button class="button" id="note_d" onclick="playNote('d');">D</button>
+	<button class="button" id="note_n" onclick="playNote('n');">N</button>
+	<button class="button" id="note_a" onclick="playNote('a');">S</button>
 </div>
 <ul class="set">
-  <li class="white b piano_s"></li>
-  <li class="black as piano_r1"></li>
-  <li class="white a piano_r2 piano_g1"></li>
-  <li class="black gs piano_r3 piano_g2"></li>
-  <li class="white f piano_g3"></li>
-  <li class="white e piano_m1"></li>
-  <li class="black ds piano_m2"></li>
-  <li class="white g piano_p"></li>
-  <li class="black fs piano_d1"></li>
-  <li class="white d piano_d2 piano_n1"></li>
-  <li class="black cs piano_n2 piano_d3"></li>
-  <li class="white c piano_n3"></li>
-  <li class="white b piano_ss"></li>
+	<li class="white b piano_s"></li>
+	<li class="black as piano_r1"></li>
+	<li class="white a piano_r2 piano_g1"></li>
+	<li class="black gs piano_r3 piano_g2"></li>
+	<li class="white f piano_g3"></li>
+	<li class="white e piano_m1"></li>
+	<li class="black ds piano_m2"></li>
+	<li class="white g piano_p"></li>
+	<li class="black fs piano_d1"></li>
+	<li class="white d piano_d2 piano_n1"></li>
+	<li class="black cs piano_n2 piano_d3"></li>
+	<li class="white c piano_n3"></li>
+	<li class="white b piano_ss"></li>
 </ul>
 <style>
-.button {
-  background-color: white;
-  border: 2px solid #4CAF50;
-  color: black;
-  padding: 16px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  transition-duration: 0.4s;
-  cursor: pointer;
-}
-
-.button:hover {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.button_hover {
+	body {
+		overflow: hidden;
+	}
+	.button {
+	background-color: white;
+	border: 2px solid #4CAF50;
+	color: black;
+	padding: 16px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	transition-duration: 0.4s;
+	cursor: pointer;
+	}
+	.button:hover {
 	background-color: #4CAF50;
-  	color: white;
-}
-
-.button_clicked {
-  background-color: #4CAF50;
-  color: white;
-}
-
-ul {
-  height:18.875em;
-  width:35.5em;
-  margin:5em auto;
-  position:relative;
-  border:1px solid #160801;
-  border-radius:1em;
-  background-color: black;
-  padding-top: 2em;
-}
-
-li {
-  margin:0;
-  padding:0;
-  list-style:none;
-  position:relative;
-  float:left
-}
-
-.white {
-  height:16em;
-  width:4em;
-  z-index:1;
-  border-left:1px solid #bbb;
-  border-bottom:1px solid #bbb;
-  border-radius:0 0 5px 5px;
-  box-shadow:-1px 0 0 rgba(255,255,255,0.8) inset,0 0 5px #ccc inset,0 0 3px rgba(0,0,0,0.2);
-  background-color: white;
-}
-
-
-.white:active {
-  	background-color: #00bcd1;
-}
-
-.black {
-  height:8em;
-  width:2em;
-  margin:0 0 0 -1em;
-  z-index:2;
-  border:1px solid #000;
-  border-radius:0 0 3px 3px;
-  box-shadow:-1px -1px 2px rgba(255,255,255,0.2) inset,0 -5px 2px 3px rgba(0,0,0,0.6) inset,0 2px 4px rgba(0,0,0,0.5);
-  background-color: black;
-}
-
-.black:active {
+	color: white;
+	}
+	.button_hover {
+	background-color: #4CAF50;
+	color: white;
+	}
+	.button_clicked {
+	background-color: #4CAF50;
+	color: white;
+	}
+	ul {
+	height:18.875em;
+	width:35.5em;
+	margin:5em auto;
+	position:relative;
+	border:1px solid #160801;
+	border-radius:1em;
+	background-color: black;
+	padding-top: 2em;
+	}
+	li {
+	margin:0;
+	padding:0;
+	list-style:none;
+	position:relative;
+	float:left
+	}
+	.white {
+	height:16em;
+	width:4em;
+	z-index:1;
+	border-left:1px solid #bbb;
+	border-bottom:1px solid #bbb;
+	border-radius:0 0 5px 5px;
+	box-shadow:-1px 0 0 rgba(255,255,255,0.8) inset,0 0 5px #ccc inset,0 0 3px rgba(0,0,0,0.2);
+	background-color: white;
+	}
+	.white:active {
 	background-color: #00bcd1;
-}
-
-.piano_key_active {
+	}
+	.black {
+	height:8em;
+	width:2em;
+	margin:0 0 0 -1em;
+	z-index:2;
+	border:1px solid #000;
+	border-radius:0 0 3px 3px;
+	box-shadow:-1px -1px 2px rgba(255,255,255,0.2) inset,0 -5px 2px 3px rgba(0,0,0,0.6) inset,0 2px 4px rgba(0,0,0,0.5);
+	background-color: black;
+	}
+	.black:active {
 	background-color: #00bcd1;
-}
-
-
-
-.a,.g,.f,.d,.c {
-  margin:0 0 0 -1em
-}
-
-ul li:first-child {
-  border-radius:5px 0 5px 5px
-}
-
-ul li:last-child {
-  border-radius:0 5px 5px 5px
-}
-
+	}
+	.piano_key_active {
+	background-color: #00bcd1;
+	}
+	.a,.g,.f,.d,.c {
+	margin:0 0 0 -1em
+	}
+	ul li:first-child {
+	border-radius:5px 0 5px 5px
+	}
+	ul li:last-child {
+	border-radius:0 5px 5px 5px
+	}
 </style>
 <script type="text/javascript">
-	var octave = 4;
-	var duration_in_seconds = 2;
+	var current_octave = 4;
+	var current_scale = 0;
+	var current_sustain = 2;
+	// var duration_in_seconds = 2;
 	var key_to_carnatic_note = {
 		"s": 's',
 		"r": 'r2',
@@ -164,24 +179,27 @@ ul li:last-child {
 		"a": 'ss'
 	}
 	var carnatic_to_western = {
-		"s": 'C',
-		"r1": 'C#',
-		"r2": 'D',
-		"r3": 'D#',
-		"g1": 'D',
-		"g2": 'D#',
-		"g3": 'E',
-		"m1": 'F',
-		"m2": 'F#',
-		"p": "G",
-		"d1": 'G#',
-		"d2": 'A',
-		"d3": 'A#',
-		"n1": 'A',
-		"n2": 'A#',
-		"n3": "B",
-		"ss": "2C"
+		"s":   0,
+		"r1":  1,
+		"r2":  2,
+		"r3":  3,
+		"g1":  2,
+		"g2":  3,
+		"g3":  4,
+		"m1":  5,
+		"m2":  6,
+		"p":   7,
+		"d1":  8,
+		"d2":  9,
+		"d3": 10,
+		"n1":  9,
+		"n2": 10,
+		"n3": 11,
+		"ss": 12
 	}
+
+	var western_notations = ['C', 'C#', 'D', 'D#', 'E','F','F#',"G",'G#','A','A#',"B",
+							'2C', '2C#','2D','2D#','2E','2F','2F#',"2G",'2G#','2A','2A#',"2B"]
 
 	var variations = {
 		"r": ["r1", "r2", "r3"],
@@ -200,13 +218,19 @@ ul li:last-child {
 	}
 	function playNote(keyNote) {
 		if(key_to_carnatic_note[keyNote] != null) {
-			console.log("Playing: " + carnatic_to_western[key_to_carnatic_note[keyNote]])
-			if(keyNote == "a") {
-				Synth.play(0, 'C', octave + 1, duration_in_seconds);
-			}
-			else {
-				Synth.play(0, carnatic_to_western[key_to_carnatic_note[keyNote]], octave, duration_in_seconds);
-			}
+			let noteToPlay = western_notations[current_scale + carnatic_to_western[key_to_carnatic_note[keyNote]]];
+			let octaveToPlay = noteToPlay[0] == '2' ? current_octave + 1: current_octave;
+			noteToPlay = noteToPlay[0] == '2' ? noteToPlay.slice(1): noteToPlay;
+
+			console.log("Playing note: " + noteToPlay + " at octave: " + octaveToPlay);
+
+			Synth.play(0, noteToPlay, octaveToPlay, current_sustain)
+			// if(keyNote == "a") {
+			// 	Synth.play(0, 'C', current_octave + 1, duration_in_seconds);
+			// }
+			// else {
+			// 	Synth.play(0, carnatic_to_western[key_to_carnatic_note[keyNote]], current_octave, duration_in_seconds);
+			// }
 			pressKeyboardKeyEffect(key_to_carnatic_note[keyNote]);
 		}
 	}
@@ -220,6 +244,9 @@ ul li:last-child {
 	};
 
 	function setNote(note) {
+		if(note == "s" || note == "p") {
+			return;
+		}
 		let baseNote = note[0].toLowerCase();
 		key_to_carnatic_note[baseNote] = note;
 		document.getElementById(note).classList.add("button_clicked");
@@ -230,6 +257,36 @@ ul li:last-child {
 		}
 	}
 
+	function increase_pitch() {
+		if(current_scale == 11) {
+			return;
+		}
+		current_scale += 1;
+		document.getElementById("current_pitch").innerHTML = western_notations[current_scale];
+	}
+
+	function decrease_pitch() {
+		if(current_scale == 0) {
+			return;
+		}
+		current_scale -= 1;
+		document.getElementById("current_pitch").innerHTML = western_notations[current_scale];
+	}
+
+	function increase_sustain() {
+		if(current_sustain < 4) {
+			current_sustain+=1;
+			document.getElementById("current_sustain").innerHTML = current_sustain;
+		}
+	}
+
+	function decrease_sustain() {
+		if(current_sustain > 1) {
+			current_sustain-=1;
+			document.getElementById("current_sustain").innerHTML = current_sustain;
+		}
+	}
+
 	// Set notes for Shankarabharanam at start.
 	setNote('r2');
 	setNote('g3');
@@ -237,4 +294,3 @@ ul li:last-child {
 	setNote('d2');
 	setNote('n3');
 </script>
-
