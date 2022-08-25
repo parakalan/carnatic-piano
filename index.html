@@ -5,82 +5,10 @@
 <h2 style="text-align: center; font-family: Copperplate;">Carnatic Piano</h2>
 <h3 style="text-align: center; font-family: Copperplate;">A simple piano with only the 16 swaras, for raga learners.</h3>
 <h3 style="text-align: center; font-family: 'Copperplate Gothic Light';">Choose the swaras for your raga, use keyboard or mouse to play the note. Use 'A' key for 'S' of next octave. The keyboard is for visualizing it on a real piano</h3>
-<div style="width: 30%; margin-top: 5%; margin-left: auto; margin-right: auto; display: flex;">
-	<table>
-		<tr>
-			<th><button id="r1" class="button" onclick="setNote('r1')">R1</button></th>
-			<th><button id="g1" class="button" onclick="setNote('g1')">G1</button></th>
-			<th><button id="m1" class="button" onclick="setNote('m1')">M1</button></th>
-			<th><button id="d1" class="button" onclick="setNote('d1')">D1</button></th>
-			<th><button id="n1" class="button" onclick="setNote('n1')">N1</button></th>
-		</tr>
-		<tr>
-			<td><button id="r2" class="button" onclick="setNote('r2')">R2</button></td>
-			<th><button id="g2" class="button" onclick="setNote('g2')">G2</button></th>
-			<th><button id="m2" class="button" onclick="setNote('m2')">M2</button></th>
-			<th><button id="d2" class="button" onclick="setNote('d2')">D2</button></th>
-			<th><button id="n2" class="button" onclick="setNote('n2')">N2</button></th>
-		</tr>
-		<tr>
-			<td><button id="r3" class="button" onclick="setNote('r3')">R3</button></td>
-			<th><button id="g3" class="button" onclick="setNote('g3')">G3</button></th>
-			<th></th>
-			<th><button id="d3" class="button" onclick="setNote('d3')">D3</button></th>
-			<th><button id="n3" class="button" onclick="setNote('n3')">N3</button></th>
-		</tr>
-	</table>
-	<table style="padding-left: 10em;">
-		<tr>
-			<th>Pitch</th>
-		</tr>
-		<tr>
-			<td><button class="button" onclick="decrease_pitch()">&#8592;</button></td>
-						<th><button id="current_pitch" style="border: none" class="button">C</button></th>
-			<th><button class="button" onclick="increase_pitch()">&#8594;</button></th>
-
-
-		</tr>
-		<!-- <tr>
-			<th>Sustain</th>
-		</tr>
-		<tr>
-			<th><button class="button" onclick="decrease_sustain()">&#8592;</button></th>
-			<th><button id="current_sustain" style="border: none" class="button">2</button></th>
-			<td><button class="button" onclick="increase_sustain()">&#8594;</button></td>
-		</tr>
-		<tr> -->
-
-		</tr>
-	</table>
-</div>
-<div style="width: 40%; margin: auto; margin-top: 5%">
-	<button class="button" id="note_s" onclick="playNote('s');">S</button>
-	<button class="button" id="note_r" onclick="playNote('r');">R</button>
-	<button class="button" id="note_g" onclick="playNote('g');">G</button>
-	<button class="button" id="note_m" onclick="playNote('m');">M</button>
-	<button class="button" id="note_p" onclick="playNote('p');">P</button>
-	<button class="button" id="note_d" onclick="playNote('d');">D</button>
-	<button class="button" id="note_n" onclick="playNote('n');">N</button>
-	<button class="button" id="note_a" onclick="playNote('a');">S</button>
-</div>
-<ul class="set">
-	<li class="white b piano_s"></li>
-	<li class="black as piano_r1"></li>
-	<li class="white a piano_r2 piano_g1"></li>
-	<li class="black gs piano_r3 piano_g2"></li>
-	<li class="white f piano_g3"></li>
-	<li class="white e piano_m1"></li>
-	<li class="black ds piano_m2"></li>
-	<li class="white g piano_p"></li>
-	<li class="black fs piano_d1"></li>
-	<li class="white d piano_d2 piano_n1"></li>
-	<li class="black cs piano_n2 piano_d3"></li>
-	<li class="white c piano_n3"></li>
-	<li class="white b piano_ss"></li>
-</ul>
 <style>
 	body {
-		overflow: hidden;
+	overflow: hidden;
+	font-family: Copperplate;
 	}
 	.button {
 	background-color: white;
@@ -107,10 +35,30 @@
 	background-color: #4CAF50;
 	color: white;
 	}
+	.raga_button {
+	background-color: white;
+	border: 2px solid #4CAF50;
+	color: black;
+	/*	    padding: 10px 20px;
+	*/	    width: 10em;
+	height: 5em;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 1em;
+	/*	    margin: 4px 2px;
+	*/	    transition-duration: 0.4s;
+	cursor: pointer;
+	}
+	.raga_button:hover {
+	background-color: #4CAF50;
+	color: white;
+	}
 	ul {
 	height:18.875em;
 	width:35.5em;
 	margin:5em auto;
+	margin-top: 0em;
 	position:relative;
 	border:1px solid #160801;
 	border-radius:1em;
@@ -162,7 +110,189 @@
 	ul li:last-child {
 	border-radius:0 5px 5px 5px
 	}
+	.preset_overlay {
+	position:absolute;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	padding-top: 8em;
+	padding-left: 15em;
+	background-color:rgba(0, 0, 0, 0.85);
+	z-index:9999;
+	color:white;
+	display: none;
+	}
+	#preset_button {
+	min-width: 40%;
+	}
 </style>
+<div style="width: 30%; margin-top: 2%; margin-left: 30%; margin-right: auto; display: flex;">
+	<button id="preset_button" class="button" onclick="document.getElementById('preset_overlay').style.display = 'block'">
+	Shankarabharanam
+	</button>
+	<table>
+		<tr>
+			<th><button id="r1" class="button" onclick="setNote('r1')">R1</button></th>
+			<th><button id="g1" class="button" onclick="setNote('g1')">G1</button></th>
+			<th><button id="m1" class="button" onclick="setNote('m1')">M1</button></th>
+			<th><button id="d1" class="button" onclick="setNote('d1')">D1</button></th>
+			<th><button id="n1" class="button" onclick="setNote('n1')">N1</button></th>
+		</tr>
+		<tr>
+			<td><button id="r2" class="button" onclick="setNote('r2')">R2</button></td>
+			<th><button id="g2" class="button" onclick="setNote('g2')">G2</button></th>
+			<th><button id="m2" class="button" onclick="setNote('m2')">M2</button></th>
+			<th><button id="d2" class="button" onclick="setNote('d2')">D2</button></th>
+			<th><button id="n2" class="button" onclick="setNote('n2')">N2</button></th>
+		</tr>
+		<tr>
+			<td><button id="r3" class="button" onclick="setNote('r3')">R3</button></td>
+			<th><button id="g3" class="button" onclick="setNote('g3')">G3</button></th>
+			<th></th>
+			<th><button id="d3" class="button" onclick="setNote('d3')">D3</button></th>
+			<th><button id="n3" class="button" onclick="setNote('n3')">N3</button></th>
+		</tr>
+	</table>
+	<table style="padding-left: 10em;">
+		<tr>
+			<th></th>
+			<th>Pitch</th>
+			<th></th>
+		</tr>
+		<tr>
+			<td><button class="button" onclick="decrease_pitch()">&#8592;</button></td>
+			<td><button id="current_pitch" style="border: none" class="button">C</button></td>
+			<td><button class="button" onclick="increase_pitch()">&#8594;</button></td>
+		</tr>
+		</tr>
+	</table>
+	<div class="preset_overlay" id="preset_overlay">
+		<h3 style="margin-left: 36%; font-family: Copperplate;">
+			Melakarta Presets
+			<span style="margin-left: 70%; cursor: default; padding: 2px;" onclick="document.getElementById('preset_overlay').style.display = 'none';">X</span>
+		</h3>
+		<table>
+			<tr>
+				<th><button class="raga_button" onclick="setRaga('Kanakangi')">Kanakangi</button></th>
+				<th><button class="raga_button" onclick="setRaga('Rathnangi')">Rathnangi</button></th>
+				<th><button class="raga_button" onclick="setRaga('Ganamurthi')">Ganamurthi</button></th>
+				<th><button class="raga_button" onclick="setRaga('Vanaspathi')">Vanaspathi</button></th>
+				<th><button class="raga_button" onclick="setRaga('Manavathi')">Manavathi</button></th>
+				<th><button class="raga_button" onclick="setRaga('Thanarupi')">Thanarupi</button></th>
+				<th><button class="raga_button" onclick="setRaga('Senavathi')">Senavathi</button></th>
+				<th><button class="raga_button" onclick="setRaga('Hanumathodi')">Hanumathodi</button></th>
+			</tr>
+			<tr>
+				<th><button class="raga_button" onclick="setRaga('Dhenuka')">Dhenuka</button></th>
+				<th><button class="raga_button" onclick="setRaga('Natakapriya')">Natakapriya</button></th>
+				<th><button class="raga_button" onclick="setRaga('Kokilapriya')">Kokilapriya</button></th>
+				<th><button class="raga_button" onclick="setRaga('Rupavathi')">Rupavathi</button></th>
+				<th><button class="raga_button" onclick="setRaga('Gayakapriya')">Gayakapriya</button></th>
+				<th><button class="raga_button" onclick="setRaga('Vakulabharanam')">Vakulabharanam</button></th>
+				<th><button class="raga_button" onclick="setRaga('Mayamalava Gowla')">Mayamalava Gowla</button></th>
+				<th><button class="raga_button" onclick="setRaga('Chakravakam')">Chakravakam</button></th>
+			</tr>
+			<tr>
+				<th><button class="raga_button" onclick="setRaga('Suryakantam')">Suryakantam</button></th>
+				<th><button class="raga_button" onclick="setRaga('Hatakambari')">Hatakambari</button></th>
+				<th><button class="raga_button" onclick="setRaga('Jankaradhvani')">Jankaradhvani</button></th>
+				<th><button class="raga_button" onclick="setRaga('Natabhairavi')">Natabhairavi</button></th>
+				<th><button class="raga_button" onclick="setRaga('Kiravani')">Kiravani</button></th>
+				<th><button class="raga_button" onclick="setRaga('Karaharapriya')">Karaharapriya</button></th>
+				<th><button class="raga_button" onclick="setRaga('Gowrimanohari')">Gowrimanohari</button></th>
+				<th><button class="raga_button" onclick="setRaga('Varunapriya')">Varunapriya</button></th>
+			</tr>
+			<tr>
+				<th><button class="raga_button" onclick="setRaga('Mararanjani')">Mararanjani</button></th>
+				<th><button class="raga_button" onclick="setRaga('Charukeshi')">Charukeshi</button></th>
+				<th><button class="raga_button" onclick="setRaga('Sarasangi')">Sarasangi</button></th>
+				<th><button class="raga_button" onclick="setRaga('Harikambhoji')">Harikambhoji</button></th>
+				<th><button class="raga_button" onclick="setRaga('Shankarabharanam')">Shankarabharanam</button></th>
+				<th><button class="raga_button" onclick="setRaga('Naganandhini')">Naganandhini</button></th>
+				<th><button class="raga_button" onclick="setRaga('Yagapriya')">Yagapriya</button></th>
+				<th><button class="raga_button" onclick="setRaga('Ragavardhani')">Ragavardhani</button></th>
+			</tr>
+			<tr>
+				<th><button class="raga_button" onclick="setRaga('Gangeyabhushani')">Gangeyabhushani</button></th>
+				<th><button class="raga_button" onclick="setRaga('Vagadhisvari')">Vagadhisvari</button></th>
+				<th><button class="raga_button" onclick="setRaga('Shulini')">Shulini</button></th>
+				<th><button class="raga_button" onclick="setRaga('Chalanata')">Chalanata</button></th>
+				<th><button class="raga_button" onclick="setRaga('Salagam')">Salagam</button></th>
+				<th><button class="raga_button" onclick="setRaga('Jalarnavam')">Jalarnavam</button></th>
+				<th><button class="raga_button" onclick="setRaga('Jalavarali')">Jalavarali</button></th>
+				<th><button class="raga_button" onclick="setRaga('Navanitham')">Navanitham</button></th>
+			</tr>
+			<tr>
+				<th><button class="raga_button" onclick="setRaga('Pavani')">Pavani</button></th>
+				<th><button class="raga_button" onclick="setRaga('Ragupriya')">Ragupriya</button></th>
+				<th><button class="raga_button" onclick="setRaga('Gavambodhi')">Gavambodhi</button></th>
+				<th><button class="raga_button" onclick="setRaga('Bhavapriya')">Bhavapriya</button></th>
+				<th><button class="raga_button" onclick="setRaga('Shubhapanthuvarali')">Shubhapanthuvarali</button></th>
+				<th><button class="raga_button" onclick="setRaga('Shadhvidha Margini')">Shadhvidha Margini</button></th>
+				<th><button class="raga_button" onclick="setRaga('Suvarnangi')">Suvarnangi</button></th>
+				<th><button class="raga_button" onclick="setRaga('Dhivyamani')">Dhivyamani</button></th>
+			</tr>
+			<tr>
+				<th><button class="raga_button" onclick="setRaga('Dhavalambari')">Dhavalambari</button></th>
+				<th><button class="raga_button" onclick="setRaga('Namanarayani')">Namanarayani</button></th>
+				<th><button class="raga_button" onclick="setRaga('Pantuvarali')">Pantuvarali</button></th>
+				<th><button class="raga_button" onclick="setRaga('Ramapriya')">Ramapriya</button></th>
+				<th><button class="raga_button" onclick="setRaga('Gamanashrama')">Gamanashrama</button></th>
+				<th><button class="raga_button" onclick="setRaga('Vishvambhari')">Vishvambhari</button></th>
+				<th><button class="raga_button" onclick="setRaga('Shyamalangi')">Shyamalangi</button></th>
+				<th><button class="raga_button" onclick="setRaga('Shanmukapriya')">Shanmukapriya</button></th>
+			</tr>
+			<tr>
+				<th><button class="raga_button" onclick="setRaga('Simhendra Madhyamam')">Simhendra Madhyamam</button></th>
+				<th><button class="raga_button" onclick="setRaga('Hemavathi')">Hemavathi</button></th>
+				<th><button class="raga_button" onclick="setRaga('Dharmavathi')">Dharmavathi</button></th>
+				<th><button class="raga_button" onclick="setRaga('Nithimathi')">Nithimathi</button></th>
+				<th><button class="raga_button" onclick="setRaga('Kanthamani')">Kanthamani</button></th>
+				<th><button class="raga_button" onclick="setRaga('Rishabhapriya')">Rishabhapriya</button></th>
+				<th><button class="raga_button" onclick="setRaga('Lathangi')">Lathangi</button></th>
+				<th><button class="raga_button" onclick="setRaga('Vachaspathi')">Vachaspathi</button></th>
+			</tr>
+			<tr>
+				<th><button class="raga_button" onclick="setRaga('Mechakalyani')">Mechakalyani</button></th>
+				<th><button class="raga_button" onclick="setRaga('Chithrambari')">Chithrambari</button></th>
+				<th><button class="raga_button" onclick="setRaga('Sucharithra')">Sucharithra</button></th>
+				<th><button class="raga_button" onclick="setRaga('Jyothisvarupini')">Jyothisvarupini</button></th>
+				<th><button class="raga_button" onclick="setRaga('Dhatuvardhani')">Dhatuvardhani</button></th>
+				<th><button class="raga_button" onclick="setRaga('Nasika Bhushani')">Nasika Bhushani</button></th>
+				<th><button class="raga_button" onclick="setRaga('Kosalam')">Kosalam</button></th>
+				<th><button class="raga_button" onclick="setRaga('Rasikapriya')">Rasikapriya</button></th>
+			</tr>
+		</table>
+	</div>
+</div>
+<div style="width: 40%; margin: auto; margin-top: 5%">
+	<button class="button" id="note_s" onclick="playNote('s');">S</button>
+	<button class="button" id="note_r" onclick="playNote('r');">R</button>
+	<button class="button" id="note_g" onclick="playNote('g');">G</button>
+	<button class="button" id="note_m" onclick="playNote('m');">M</button>
+	<button class="button" id="note_p" onclick="playNote('p');">P</button>
+	<button class="button" id="note_d" onclick="playNote('d');">D</button>
+	<button class="button" id="note_n" onclick="playNote('n');">N</button>
+	<button class="button" id="note_a" onclick="playNote('a');">S</button>
+	<!-- <button class="button" id="note_s" style="margin-left: 30%;font-family: Copperplate;"
+		onclick="document.getElementById('preset_overlay').style.display = 'inline'">Melakarta Presets</button> -->
+</div>
+<ul class="set">
+	<li class="white b piano_s"></li>
+	<li class="black as piano_r1"></li>
+	<li class="white a piano_r2 piano_g1"></li>
+	<li class="black gs piano_r3 piano_g2"></li>
+	<li class="white f piano_g3"></li>
+	<li class="white e piano_m1"></li>
+	<li class="black ds piano_m2"></li>
+	<li class="white g piano_p"></li>
+	<li class="black fs piano_d1"></li>
+	<li class="white d piano_d2 piano_n1"></li>
+	<li class="black cs piano_n2 piano_d3"></li>
+	<li class="white c piano_n3"></li>
+	<li class="white b piano_ss"></li>
+</ul>
 <script type="text/javascript">
 	var current_octave = 4;
 	var current_scale = 0;
@@ -255,6 +385,18 @@
 				document.getElementById(variations[baseNote][i]).classList.remove("button_clicked");
 			}
 		}
+
+		let ragaKey = key_to_carnatic_note["r"] + "_" +
+					   key_to_carnatic_note["g"] + "_" +
+					   key_to_carnatic_note["m"] + "_" +
+					   key_to_carnatic_note["d"] + "_" +
+					   key_to_carnatic_note["n"];
+		if(reverseRagaMap[ragaKey] != undefined) {
+			document.getElementById("preset_button").innerHTML = reverseRagaMap[ragaKey];
+		}
+		else {
+			document.getElementById("preset_button").innerHTML = "No such raga"
+		}
 	}
 
 	function increase_pitch() {
@@ -285,6 +427,14 @@
 			current_sustain-=1;
 			document.getElementById("current_sustain").innerHTML = current_sustain;
 		}
+	}
+
+	function setRaga(ragaName) {
+		for(let i=0; i < melakartaPresets[ragaName].length; i++) {
+			setNote(melakartaPresets[ragaName][i]);
+		}
+		document.getElementById("preset_overlay").style.display = "none";
+		document.getElementById("preset_button").innerHTML = ragaName;
 	}
 
 	// Set notes for Shankarabharanam at start.
